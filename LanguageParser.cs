@@ -298,7 +298,20 @@ namespace Arnilsen.I18n
             var s = sections.Where((sec) => sec.id == id).FirstOrDefault();
             
             if(s != null)
-                UnloadSection(s);
+                UnloadSection(s, ignore);
+        }
+
+        /// <summary>
+        /// Unload a section
+        /// </summary>
+        /// <param name="section"></param>
+        public void UnloadSection(string section, params string[] ignore)
+        {
+            ulong id = LanguageUtils.HashString(section);
+            var s = sections.Where((sec) => sec.id == id).FirstOrDefault();
+            
+            if(s != null)
+                UnloadSection(s, ignore);
         }
 
         /// <summary>
