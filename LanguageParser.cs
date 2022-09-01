@@ -104,7 +104,7 @@ namespace Arnilsen.I18n
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public string GetEntry(string key, params object[] args) => string.Format(key, args);
+        public string GetEntry(string key, params object[] args) => string.Format(GetEntry(LanguageUtils.HashString(key)), args);
 
         /// <summary>
         /// Get entry from loaded sections
@@ -112,6 +112,13 @@ namespace Arnilsen.I18n
         /// <param name="key"></param>
         /// <returns></returns>
         public string GetEntry(string key) => GetEntry(LanguageUtils.HashString(key));
+
+        /// <summary>
+        /// Get entry replacing args
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public string GetEntry(ulong key, params object[] args) => string.Format(GetEntry(key), args);
 
         /// <summary>
         /// Get entry from loaded sections
