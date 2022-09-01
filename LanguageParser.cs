@@ -156,7 +156,7 @@ namespace Arnilsen.I18n
             Section[] sec = new Section[sections.Length];
 
             for(int i = 0; i < sections.Length; i ++)
-                sec[i] = LoadSection(sections[i], new ulong[0]);
+                sec[i] = LoadSectionExcluding(sections[i], new ulong[0]);
             
             return sec;
         }
@@ -167,14 +167,14 @@ namespace Arnilsen.I18n
         /// <param name="sections"></param>
         /// <param name="ignore"></param>
         /// <returns></returns>
-        public Section[] LoadSections(string[] sections, string[] ignore)
+        public Section[] LoadSectionsExcluding(string[] sections, string[] excluding)
         {
-            ulong[] ignoreIds = LanguageUtils.HashStrings(ignore);
+            ulong[] excludingIds = LanguageUtils.HashStrings(excluding);
 
             Section[] sec = new Section[sections.Length];
 
             for(int i = 0; i < sections.Length; i ++)
-                sec[i] = LoadSection(sections[i], ignoreIds);
+                sec[i] = LoadSectionExcluding(sections[i], excludingIds);
             
             return sec;
         }
@@ -186,7 +186,7 @@ namespace Arnilsen.I18n
         /// <returns></returns>
         public Section LoadSection(string section)
         {
-            return LoadSection(section, new ulong[0]);
+            return LoadSectionExcluding(section, new ulong[0]);
         }
 
         /// <summary>
@@ -195,10 +195,10 @@ namespace Arnilsen.I18n
         /// <param name="section"></param>
         /// <param name="ignore"></param>
         /// <returns></returns>
-        public Section LoadSection(string section, params string[] ignore)
+        public Section LoadSectionExcluding(string section, params string[] excluding)
         {
-            ulong[] ignoreIds = LanguageUtils.HashStrings(ignore);
-            return LoadSection(section, ignoreIds);
+            ulong[] excludingIds = LanguageUtils.HashStrings(excluding);
+            return LoadSectionExcluding(section, excludingIds);
         }
 
         /// <summary>
@@ -207,7 +207,7 @@ namespace Arnilsen.I18n
         /// <param name="section"></param>
         /// <param name="ignore"></param>
         /// <returns></returns>
-        public Section LoadSection(string section, params ulong[] ignore)
+        public Section LoadSectionExcluding(string section, params ulong[] excluding)
         {
             ulong hash = LanguageUtils.HashString(section);
 
@@ -218,7 +218,7 @@ namespace Arnilsen.I18n
 
             SectionSnapshot snapshot = search.First();
 
-            return LoadSection(snapshot, ignore);
+            return LoadSection(snapshot, excluding);
         }
         
         private Section LoadSection(SectionSnapshot snapshot, ulong[] ignore, Section parent = null)
@@ -279,48 +279,57 @@ namespace Arnilsen.I18n
         /// Unload multiples sections at the same time
         /// </summary>
         /// <param name="section"></param>
-        public void UnloadSections(string[] section, params string[] ignore)
+        public void UnloadSections(string[] sections)
         {
-            ulong[] ignoreIds = LanguageUtils.HashStrings(ignore);
-
-            foreach(string s in section)
-                UnloadSection(s, ignoreIds);
+            UnloadSectionsKeeping(sections, new string[0]);
         }
 
         /// <summary>
         /// Unload multiples sections at the same time
         /// </summary>
         /// <param name="section"></param>
-        public void UnloadSections(string[] section, params ulong[] ignore)
+        public void UnloadSectionsKeeping(string[] section, params string[] keeping)
+        {
+            ulong[] ignoreIds = LanguageUtils.HashStrings(keeping);
+
+            foreach(string s in section)
+                UnloadSectionKeeping(s, ignoreIds);
+        }
+
+        /// <summary>
+        /// Unload multiples sections at the same time
+        /// </summary>
+        /// <param name="section"></param>
+        public void UnloadSectionsKeeping(string[] section, params ulong[] keeping)
         {
             foreach(string s in section)
-                UnloadSection(s, ignore);
+                UnloadSectionKeeping(s, keeping);
         }
 
         /// <summary>
         /// Unload a section
         /// </summary>
         /// <param name="section"></param>
-        public void UnloadSection(string section, params ulong[] ignore)
+        public void UnloadSectionKeeping(string section, params ulong[] keeping)
         {
             ulong id = LanguageUtils.HashString(section);
             var s = sections.Where((sec) => sec.id == id).FirstOrDefault();
             
             if(s != null)
-                UnloadSection(s, ignore);
+                UnloadSectionKeeping(s, keeping);
         }
 
         /// <summary>
         /// Unload a section
         /// </summary>
         /// <param name="section"></param>
-        public void UnloadSection(string section, params string[] ignore)
+        public void UnloadSectionKeeping(string section, params string[] keeping)
         {
             ulong id = LanguageUtils.HashString(section);
             var s = sections.Where((sec) => sec.id == id).FirstOrDefault();
             
             if(s != null)
-                UnloadSection(s, ignore);
+                UnloadSectionKeeping(s, keeping);
         }
 
         /// <summary>
@@ -341,14 +350,14 @@ namespace Arnilsen.I18n
         /// Unload a section
         /// </summary>
         /// <param name="section"></param>
-        public void UnloadSection(Section section, params ulong[] ignore)
+        public void UnloadSectionKeeping(Section section, params ulong[] keeping)
         {
             sections.Remove(section);
 
             foreach(var child in section.children)
             {
-                if(!ignore.Contains(child.id))
-                    UnloadSection(child, ignore);
+                if(!keeping.Contains(child.id))
+                    UnloadSectionKeeping(child, keeping);
             }
         }
 
@@ -356,10 +365,10 @@ namespace Arnilsen.I18n
         /// Unload a section
         /// </summary>
         /// <param name="section"></param>
-        public void UnloadSection(Section section, params string[] ignore)
+        public void UnloadSectionKeeping(Section section, params string[] keeping)
         {
-            ulong[] ignoreIds = LanguageUtils.HashStrings(ignore);
-            UnloadSection(section, ignoreIds);
+            ulong[] ignoreIds = LanguageUtils.HashStrings(keeping);
+            UnloadSectionKeeping(section, ignoreIds);
         }
 
         /// <summary>
