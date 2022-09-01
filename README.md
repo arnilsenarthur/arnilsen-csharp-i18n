@@ -70,7 +70,7 @@ ui { main_menu { buttons { play = "Play", exit = "Exit Game" } } }
 ui/main_menu { buttons { play = "Play", exit = "Exit Game" } } 
 ui { main_menu/buttons { play = "Play", exit = "Exit Game" } } 
 
-# You can define groups more than one time. And they will packed together
+# You can define groups more than one time. And they will be packed together
 
 ui { [...] }
 dialog { [...] }
