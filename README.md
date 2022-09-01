@@ -1,7 +1,7 @@
 # C# Árnilsen Language/I18n Lib
 - Easy and dynamic syntax
 - Precompiled Language Files (Smaller, faster to parse and to look-up)
-- Section System (You can only load some sections of the file, optmizing memory usage and parse speeds)
+- Section System (You can load only some sections of the file, optmizing memory usage and parse speeds)
 - Small Library
 
 ```
@@ -139,7 +139,7 @@ bool b = parser.IsSectionLoaded("ui");
 ### Entry localization
 ```csharp
 //Get entry from loaded file. If not found, "?" will be returned
-string s = parser.GetEntry("ui/main_menu/buttons/play")
+string s = parser.GetEntry("ui/main_menu/buttons/play");
 ```
 
 ### Entry Argument Replacement
@@ -166,6 +166,7 @@ string s = parser.GetEntry("won", "Player22", 150);
 | void UnloadSections(string[] section, params string[] ignore) |
 | void UnloadSections(string[] section, params ulong[] ignore) |
 | void UnloadSection(string section, params ulong[] ignore) |
+| void UnloadSection(string section, params string[] ignore) |
 | void UnloadSection(Section section) |
 | void UnloadSection(Section section, params ulong[] ignore) |
 | void UnloadSection(Section section, params string[] ignore) |
