@@ -28,6 +28,8 @@ $ui
 ## Size Comparision
 |  Plain File  | Compiled File |
 | ------------ | ------------  |
+| 2834210 bytes| 1518772 bytes|
+| 565170 bytes | 300022 bytes  |
 | 15678 bytes  | 6422 bytes    | 
 | 1127 bytes   | 498 bytes     |
 | 518 bytes    | 334 bytes     |
