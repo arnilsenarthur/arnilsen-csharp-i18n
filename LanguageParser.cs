@@ -70,6 +70,8 @@ namespace Arnilsen.I18n
         {
             return null;
         }
+        
+        public Random random = new Random();
 
         /// <summary>
         /// Parse bytes to sections
@@ -127,7 +129,7 @@ namespace Arnilsen.I18n
                     if(v.Contains('\n'))
                     {
                         string[] entries = v.Split('\n');
-                        return entries[Program.random.Next(entries.Length)];
+                        return entries[random.Next(entries.Length)];
                     }
 
                     return v;
