@@ -26,10 +26,11 @@ $ui
 ```
 
 ## Size Comparision
-|  Plain File | Compiled File   |
-| ------------ | ------------ |
-|  1127 bytes  |   498 bytes |
-|  518 bytes  |  334 bytes |
+|  Plain File  | Compiled File |
+| ------------ | ------------  |
+| 15678 bytes  | 6422 bytes    | 
+| 1127 bytes   | 498 bytes     |
+| 518 bytes    | 334 bytes     |
 
 ## Syntax Rules
 ```
