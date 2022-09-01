@@ -1,0 +1,12 @@
+$ui
+{
+    $main_menu
+    {
+        play = "Play Game"
+    }
+
+    $inventory
+    {
+        title = "Inventory"
+    }
+}
