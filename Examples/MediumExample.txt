@@ -1,0 +1,30 @@
+$items
+{
+    $block
+    {
+        stone = "Stone"
+        dirt = "Dirt"
+    }
+
+    apple = "Apple"
+    feather = "Feather"
+    random_disc = "Rock" "Pop" "Funk" "Samba"
+}
+
+$entity
+{
+    horse = "Horse"
+    pig = "Pig"
+    dog = "Dog" "Ralf" "Layla" "Bob" "Spider"
+}
+
+$menu
+{
+    play = "Play"
+    pause = "Pause"
+    resume = "Resume"
+    leave = "Leave"
+    leave/sure = "Do you want really to leave the game?"
+
+    coins = "{0} $"
+}
