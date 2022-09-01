@@ -7,10 +7,10 @@ public class Program
     public static void Main(string[] args)
     {
         LanguageCompiler compiler = new LanguageCompiler();
-        byte[] bytes = compiler.Compile("Test.txt");
-        File.WriteAllBytes("Test_.bytes", bytes);
+        byte[] bytes = compiler.Compile("MediumExample.txt");
+        File.WriteAllBytes("MediumExample_.bytes", bytes);
 
-        LanguageParser parser = new LanguageParserFile("Test_.bytes");
+        LanguageParser parser = new LanguageParserFile("MediumExample_.bytes");
         parser.Parse();
         
         parser.LoadSection("");
